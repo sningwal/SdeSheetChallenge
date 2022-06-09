@@ -1,0 +1,26 @@
+1.find all permutation and then find next permutation 
+2.STL -next_permutation(arr,arr+3);//using in-built function of C++
+3.->based on observation -> all permutation are in increasing order so
+--------------------------
+#include <bits/stdc++.h> 
+void swap(vector<int> &permutation,int i,int j){
+     int tmp =permutation[i];
+   permutation[i]=permutation[j];
+   permutation[j]=tmp;
+}
+void reverse(vector<int> &permutation,int i,int j ){
+    while(i<j){swap(permutation,i++,j--);}
+}
+vector<int> nextPermutation(vector<int> &permutation, int n)
+{ 
+    if(permutation.size() <=1 ) return permutation ;
+     int i= permutation.size()-2;
+    while(i>=0 && permutation[i]>= permutation[i+1]) i--;
+    if(i>=0){
+        int j= permutation.size()-1;
+        while(permutation[j]<= permutation[i]) j--;
+        swap(permutation,i,j);
+    }
+    reverse(permutation,i+1, permutation.size()-1);
+    return permutation;
+}
