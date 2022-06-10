@@ -1,0 +1,29 @@
+#include <bits/stdc++.h> 
+// This is a medium level question with a bit of twist with the spiral travesal of a matrix. The algorithm is simple, Take 4 counters up, down, left and right showing the updation limits for the matrix in one traversal.
+
+// In one traversal, you may update a single outer layer and then increment and decrement the counters in such a way that these counters give us the corners of non updated matrix.
+void rotateMatrix(vector<vector<int>> &mat, int n, int m)
+{
+    int u=0,d=n-1,l=0,r=m-1;
+    if(d==0 || r==0)return;
+    while(l<r && u<d){
+        int temp=mat[u][u];
+        for(int j=l+1;j<=r;j++){
+            swap(temp,mat[u][j]);
+        }
+      for(int i=u+1;i<=d;i++){
+            swap(temp,mat[i][r]);
+        }
+         for(int j=r-1;j>=l;j--){
+            swap(temp,mat[d][j]);
+        }
+         for(int i=d-1;i>=u;i--){
+            swap(temp,mat[i][l]);
+        }
+        u++;
+        d--;
+        l++;
+        r--;
+        
+    }
+    }
