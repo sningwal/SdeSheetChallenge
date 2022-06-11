@@ -1,0 +1,49 @@
+Brute N2
+Optimal->NLogN N
+//HW->Write Clean Code
+#include <bits/stdc++.h> 
+long long merge(long long arr[],long long l,long long m,long long h){
+    long long inv_count=0;
+    long long n1=m-l+1;
+    long long n2=h-m;
+    long long k=l;
+    long long left[n1],right[n2];//Create only one temporary array
+    for(int i=0;i<n1;i++){
+        left[i]=arr[l+i];
+    }
+    for(int i=0;i<n2;i++){
+        right[i]=arr[m+i+1];
+    }
+   long long idx1=0,idx2=0;
+    k=l;
+    while(idx1<n1 && idx2<n2){
+        if(left[idx1]<=right[idx2]){
+            arr[k++]=left[idx1++];
+        }
+        else{
+            arr[k++]=right[idx2++];
+            inv_count= inv_count+(n1-idx1);
+        }
+    }
+    while(idx1<n1){
+         arr[k++]=left[idx1++];
+    }
+    while(idx2<n2){
+       arr[k++]=right[idx2++];
+      }
+    return inv_count;
+}
+long long mergesort(long long arr[],long long low,long long high ){
+    long long inv_count=0;
+     long long mid;
+ if(low<high){
+    mid = (high+low)/2;
+   inv_count += mergesort(arr,low,mid);
+   inv_count += mergesort(arr,mid+1,high);
+   inv_count +=merge(arr,low,mid,high);
+ }
+    return inv_count;
+}
+long long getInversions(long long *arr, int n){
+    return mergesort(arr,0,n-1);
+}
