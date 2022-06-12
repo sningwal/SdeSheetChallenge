@@ -1,0 +1,29 @@
+loops
+map
+moore voting algo
+#include <bits/stdc++.h> 
+int findMajorityElement(int arr[], int n) {
+	int count=0;
+    //
+    int ansel;
+    int i=0;
+    for(;i<n;i++){
+        if(count==0){
+          ansel=arr[i];
+        }  
+        if(ansel==arr[i]){
+            count++;
+        }
+        else{
+           count--;
+        }
+    }
+    count=0;
+    for(int i=0;i<n;i++){
+        if(ansel==arr[i])
+            count++;
+    }
+    if(count>n/2)
+       return ansel;
+    return -1;
+}
