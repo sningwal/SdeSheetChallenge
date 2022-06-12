@@ -1,0 +1,43 @@
+m*n
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
+    // Write your code here.
+     int i = 0, j = n-1;
+        while (i < m && j >= 0)
+        {
+            if (mat[i][j] == target)
+            {
+                return true;
+            }
+            if (mat[i][j] > target)
+                j--;
+
+            else
+                i++;
+        }
+        return false;
+    }
+
+---log(m*n)----
+#include <bits/stdc++.h> 
+#include <vector>
+//consider as 1D -> Obeservation MOno increase 
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
+    int s=0;
+    int e=m*n-1;
+   int mid=(s+(e-s)/2);
+    while(s<=e){
+        int elmt=mat[mid/n][mid%n];
+        if(elmt==target)
+        {
+            return true;
+        }
+    if(elmt<target){
+            s=mid+1;
+         }
+        else{
+            e=mid-1;
+         }
+        mid=(s+(e-s)/2);
+    }
+            return false;
+}
