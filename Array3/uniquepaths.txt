@@ -1,0 +1,24 @@
+//Recursive
+#include <bits/stdc++.h> 
+int countPaths(int i,int j,int m,int n){
+    if(i==m-1 && j==n-1) return 1;
+    if(i>=m || j>=n) return 0;
+    return countPaths(i+1,j,m,n) + countPaths(i,j+1,m,n);
+}
+int uniquePaths(int m, int n) {
+	// Write your code here.
+    int i=0;
+    int j=0;
+    return countPaths(i,j,m,n);
+}
+//DP
+//Combination Solution m+n-2 = steps in a path ncr mcr
+#include <bits/stdc++.h> 
+int uniquePaths(int m, int n) {
+      int N = m + n - 2;//steps to reach ->combination
+      int r = m - 1; 
+      double res = 1;
+   for (int i = 1; i <= r; i++)
+         res = res * (N - r + i) / i;
+            return (int)res;
+}
